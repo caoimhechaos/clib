@@ -36,7 +36,7 @@ void *
 c_hashtable_lookup(struct c_hashtable *h, const void *key)
 {
 	uint32_t hvalue, hvalue_lookup;
-	struct c_hashtable_value *newval;
+	struct c_hashtable_value *val;
 
 	if (!h)
 		return NULL;
@@ -44,12 +44,12 @@ c_hashtable_lookup(struct c_hashtable *h, const void *key)
 	hvalue = h->h_hash(key);
 	hvalue_lookup = hvalue % h->h_size;
 
-	SLIST_FOREACH(newval, &h->m_values[hvalue_lookup], v_vlist)
+	SLIST_FOREACH(val, &h->m_values[hvalue_lookup], v_vlist)
 	{
-		if (!h->h_equals(newval->key, key))
+		if (!h->h_equals(val->key, key))
 			continue;
 
-		return newval->value;
+		return val->value;
 	}
 
 	/* Nothing found, too bad. */
@@ -65,7 +65,7 @@ c_hashtable_lookup_cb(struct c_hashtable *h, const void *key, c_htcallback cb,
 	const void *userdata)
 {
 	uint32_t hvalue, hvalue_lookup;
-	struct c_hashtable_value *newval;
+	struct c_hashtable_value *val;
 
 	if (!h)
 		return 0;
@@ -73,12 +73,12 @@ c_hashtable_lookup_cb(struct c_hashtable *h, const void *key, c_htcallback cb,
 	hvalue = h->h_hash(key);
 	hvalue_lookup = hvalue % h->h_size;
 
-	SLIST_FOREACH(newval, &h->m_values[hvalue_lookup], v_vlist)
+	SLIST_FOREACH(val, &h->m_values[hvalue_lookup], v_vlist)
 	{
-		if (!h->h_equals(newval->key, key))
+		if (!h->h_equals(val->key, key))
 			continue;
 
-		if (cb(newval->value, userdata))
+		if (cb(val->value, userdata))
 			return 1;
 	}
 
