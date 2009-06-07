@@ -37,17 +37,23 @@ struct c_hashtable
  */
 
 /* Create a new hash table. */
-extern struct c_hashtable *c_hashtable_new(c_hashfunc hash, c_equalfunc equals);
-extern struct c_hashtable *c_hashtable_new_complex(c_hashfunc hash, c_equalfunc equals,
-	c_destructor key_destructor, c_destructor value_destructor,
-	uint8_t nbits);
+extern struct c_hashtable *c_hashtable_new(c_hashfunc hash,
+	c_equalfunc equals);
+extern struct c_hashtable *c_hashtable_new_complex(c_hashfunc hash,
+	c_equalfunc equals, c_destructor key_destructor,
+	c_destructor value_destructor, uint8_t nbits);
 
 /* Add/remove hash table entries. */
-extern int c_hashtable_insert(struct c_hashtable *h, const void *key, const void *value);
-extern int c_hashtable_replace(struct c_hashtable *h, const void *key, const void *value);
+extern int c_hashtable_insert(struct c_hashtable *h, const void *key,
+	const void *value);
+extern int c_hashtable_replace(struct c_hashtable *h, const void *key,
+	const void *value);
 
 /* Lookup functions. */
 extern void *c_hashtable_lookup(struct c_hashtable *h, const void *key);
-extern int c_hashtable_lookup_cb(struct c_hashtable *h, const void *key, c_htcallback cb, const void *userdata);
+extern int c_hashtable_lookup_cb(struct c_hashtable *h, const void *key,
+	c_htcallback cb, const void *userdata);
+extern int c_hashtable_foreach(struct c_hashtable *h, c_htcallback cb,
+	const void *userdata);
 
 #endif /* HAVE_CLIB_H */
