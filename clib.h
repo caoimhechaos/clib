@@ -61,4 +61,9 @@ extern int c_hashtable_foreach(struct c_hashtable *h, c_htcallback cb,
 extern int c_hashtable_remove(struct c_hashtable *h, const void *key);
 extern int c_hashtable_remove_all(struct c_hashtable *h);
 
+/* Some default functions for hashes et cetera. */
+extern int c_stringequals(const void *a, const void *b);
+extern int c_stringhash(const void *input);
+extern int c_dummyhash(const void *input);
+
 #endif /* HAVE_CLIB_H */
