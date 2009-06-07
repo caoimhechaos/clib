@@ -28,15 +28,21 @@ struct c_hashtable
 	c_destructor	h_keydestr;
 	c_destructor	h_valdestr;
 
-	SLIST_HEAD(, c_hashtable_value) *m_values;
+	SLIST_HEAD(, c_hashtable_value) * m_values;
 };
 
 /**
  * Function prototypes
  */
+
+/* Create a new hash table. */
 struct c_hashtable *c_hashtable_new(c_hashfunc hash, c_equalfunc equals);
 struct c_hashtable *c_hashtable_new_complex(c_hashfunc hash, c_equalfunc equals,
 	c_destructor key_destructor, c_destructor value_destructor,
 	uint8_t nbits);
+
+/* Add/remove hash table entries. */
+int c_hashtable_insert(struct c_hashtable *h, const void *key, const void *value);
+int c_hashtable_replace(struct c_hashtable *h, const void *key, const void *value);
 
 #endif /* HAVE_CLIB_H */
