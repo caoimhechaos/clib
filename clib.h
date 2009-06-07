@@ -7,6 +7,7 @@
 typedef uint32_t	(*c_hashfunc)(const void *input);
 typedef int		(*c_equalfunc)(const void *a, const void *b);
 typedef void		(*c_destructor)(void *what);
+typedef int		(*c_htcallback)(const void *entry, const void *userdata);
 
 /**
  * Data structures
@@ -36,13 +37,17 @@ struct c_hashtable
  */
 
 /* Create a new hash table. */
-struct c_hashtable *c_hashtable_new(c_hashfunc hash, c_equalfunc equals);
-struct c_hashtable *c_hashtable_new_complex(c_hashfunc hash, c_equalfunc equals,
+extern struct c_hashtable *c_hashtable_new(c_hashfunc hash, c_equalfunc equals);
+extern struct c_hashtable *c_hashtable_new_complex(c_hashfunc hash, c_equalfunc equals,
 	c_destructor key_destructor, c_destructor value_destructor,
 	uint8_t nbits);
 
 /* Add/remove hash table entries. */
-int c_hashtable_insert(struct c_hashtable *h, const void *key, const void *value);
-int c_hashtable_replace(struct c_hashtable *h, const void *key, const void *value);
+extern int c_hashtable_insert(struct c_hashtable *h, const void *key, const void *value);
+extern int c_hashtable_replace(struct c_hashtable *h, const void *key, const void *value);
+
+/* Lookup functions. */
+extern void *c_hashtable_lookup(struct c_hashtable *h, const void *key);
+extern int c_hashtable_lookup_cb(struct c_hashtable *h, const void *key, c_htcallback cb, const void *userdata);
 
 #endif /* HAVE_CLIB_H */
