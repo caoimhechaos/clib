@@ -102,3 +102,17 @@ out_free:
 	free(h);
 	return NULL;
 }
+
+/**
+ * Destroy the hash table again.
+ */
+void
+c_hashtable_destroy(struct c_hashtable *h)
+{
+	/**
+	 * FIXME: Not sure this is enough, should be checked with a memory
+	 * leak tester.
+	 */
+	c_hashtable_remove_all(h);
+	free(h);
+}
