@@ -36,12 +36,13 @@ struct c_hashtable
  * Function prototypes
  */
 
-/* Create a new hash table. */
+/* Create or destroy a new hash table. */
 extern struct c_hashtable *c_hashtable_new(c_hashfunc hash,
 	c_equalfunc equals);
 extern struct c_hashtable *c_hashtable_new_complex(c_hashfunc hash,
 	c_equalfunc equals, c_destructor key_destructor,
 	c_destructor value_destructor, uint8_t nbits);
+extern void c_hashtable_destroy(struct c_hashtable *h);
 
 /* Add/remove hash table entries. */
 extern int c_hashtable_insert(struct c_hashtable *h, const void *key,
