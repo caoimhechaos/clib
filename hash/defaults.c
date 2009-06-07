@@ -36,6 +36,13 @@ int
 c_stringequals(const void *a, const void *b)
 {
 	const char *str_a = a, *str_b = b;
+
+	if (a == NULL && b == NULL)
+		return 1;
+
+	if (a == NULL || b == NULL)
+		return 0;
+
 	return !strcmp(str_a, str_b);
 }
 
