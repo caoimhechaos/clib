@@ -14,6 +14,9 @@
 #ifdef HAVE_MEMORY_H
 #include <memory.h>
 #endif
+#ifdef HAVE_STDLIB_H
+#include <stdlib.h>
+#endif
 
 #ifdef HAVE_QUEUE_H
 #include <queue.h>
