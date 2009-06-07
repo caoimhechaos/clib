@@ -57,4 +57,8 @@ extern int c_hashtable_lookup_cb(struct c_hashtable *h, const void *key,
 extern int c_hashtable_foreach(struct c_hashtable *h, c_htcallback cb,
 	const void *userdata);
 
+/* Remove functions. */
+extern int c_hashtable_remove(struct c_hashtable *h, const void *key);
+extern int c_hashtable_remove_all(struct c_hashtable *h);
+
 #endif /* HAVE_CLIB_H */
