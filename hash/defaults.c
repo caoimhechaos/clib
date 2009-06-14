@@ -53,7 +53,7 @@ int
 c_stringhash(const void *input)
 {
 	const char *cvals = input;
-	uint32_t hval;
+	uint32_t hval = 0;
 	size_t i;
 
 	for (i = 0; i < strlen(input); i++)
