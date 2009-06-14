@@ -1,7 +1,7 @@
 #ifndef HAVE_T_TESTSUITE_H
 #define HAVE_T_TESTSUITE_H 1
 
-#define	testresult(text, code)	do { int res = code; exitval |= res;	\
+#define	testresult(text, code)	do { int res = code; exitval |= !res;	\
 	if (res)							\
 		fprintf(stderr, "Test %d: %s: OK\n", ++ntest, text);	\
 	else								\
@@ -15,12 +15,12 @@
 		exitval |= 1;						\
 		break;							\
 	}								\
-	if (!strcmp(res, value)) {					\
+	if (!strcmp(res, value))					\
 		fprintf(stderr, "Test %d: %s: OK\n", ++ntest, text);	\
-	} else								\
+	else {								\
 		fprintf(stderr, "Test %d: %s: FAIL (\"%s\" != \"%s\")\n",\
 			++ntest, text, res, value);			\
 		exitval |= 1;						\
-	} while(0)
+	} } while(0)
 
 #endif /* HAVE_T_TESTSUITE_H */
