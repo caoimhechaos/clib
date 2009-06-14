@@ -1,7 +1,6 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.63])
 AC_INIT([clib], [0.1.99], [tonnerre@NetBSD.org])
 AC_CONFIG_SRCDIR([clib.h])
 AC_CONFIG_HEADERS([config.h])
