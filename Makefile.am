@@ -1,4 +1,4 @@
-SUBDIRS=	hash t
+SUBDIRS=	hash t include/clib
 lib_LTLIBRARIES=	libclib.la
 libclib_la_SOURCES=
 libclib_la_LIBADD=	hash/libhash.la
