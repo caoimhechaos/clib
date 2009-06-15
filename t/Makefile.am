@@ -4,7 +4,7 @@ libempty_la_SOURCES=	empty.c
 TESTS=			hash_basics
 EXTRA_DIST=		${TESTS}
 
-CPPFLAGS+=		${DEFS} ${DEFAULT_INCLUDES} ${INCLUDES} ${AM_CPPFLAGS} ${AM_CFLAGS} ${CFLAGS} -I${top_srcdir}
+AM_CPPFLAGS=		-I${top_srcdir}
 #LDFLAGS+=		${top_srcdir}/libclib.la
 
 CLEANFILES=		${TESTS} ${TESTS:=.o}
