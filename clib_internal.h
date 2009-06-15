@@ -26,5 +26,8 @@
 #ifdef HAVE_SYS_QUEUE_H
 #include <sys/queue.h>
 #endif
+#ifdef HAVE_CLIB_QUEUE_H
+#include <clib/queue.h>
+#endif
 
 #include "clib.h"
