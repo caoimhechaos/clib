@@ -51,8 +51,8 @@ c_hashtable_insert(struct c_hashtable *h, const void *key, const void *value)
 		return 0;
 
 	SLIST_INSERT_HEAD(&h->m_values[hvalue_lookup], newval, v_vlist);
-	newval->key = key;
-	newval->value = value;
+	newval->key = (void *)key;
+	newval->value = (void *)value;
 
 	return 1;
 }
@@ -81,7 +81,7 @@ c_hashtable_replace(struct c_hashtable *h, const void *key, const void *value)
 		if (h->h_valdestr)
 			h->h_valdestr(newval->value);
 
-		newval->value = value;
+		newval->value = (void *)value;
 		return 1;
 	}
 
@@ -91,8 +91,8 @@ c_hashtable_replace(struct c_hashtable *h, const void *key, const void *value)
 		return 0;
 
 	SLIST_INSERT_HEAD(&h->m_values[hvalue_lookup], newval, v_vlist);
-	newval->key = key;
-	newval->value = value;
+	newval->key = (void *)key;
+	newval->value = (void *)value;
 
 	return 1;
 }
