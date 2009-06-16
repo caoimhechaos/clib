@@ -40,7 +40,7 @@ c_hashtable_remove(struct c_hashtable *h, const void *key)
 	struct c_hashtable_value *val, *oldval = NULL;
 
 	if (!h)
-		return NULL;
+		return 0;
 
 	hvalue = h->h_hash(key);
 	hvalue_lookup = hvalue % h->h_size;
