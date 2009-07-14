@@ -1,0 +1,23 @@
+Source: libclib
+Priority: extra
+Maintainer: Tonnerre Lombard <tonnerre.lombard@sygroup.ch>
+Build-Depends: debhelper (>= 7), autotools-dev
+Standards-Version: 3.7.3
+Section: libs
+Homepage: http://github.com/tonnerre/clib/
+
+Package: libclib-dev
+Section: libdevel
+Architecture: any
+Depends: libclib0 (= ${binary:Version})
+Description: Development headers for clib
+ This package contains development headers and similar for clib.
+
+Package: libclib0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Library for C providing things like hash lists et cetera
+ This is a library which provides a lot of features people have always
+ been missing in the C programming languages, such as hash lists,
+ dynamically expanding arrays, etc.
