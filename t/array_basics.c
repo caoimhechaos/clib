@@ -3,6 +3,24 @@
 
 #include <stdio.h>
 
+static int
+print_array_cb(void *val, void *_ictr)
+{
+	char *text = val;
+	int *ictr = _ictr;
+	printf("Element %d content \"%s\"\n", *ictr, val);
+	*ictr++;
+	return 0;
+}
+
+static void
+print_array(struct c_array *a)
+{
+	int ictr = 0;
+	printf("Array size=%d len=%d\n", a->a_size, a->a_len);
+	c_array_foreach(a, print_array_cb, &ictr);
+}
+
 int
 main(void)
 {
@@ -37,6 +55,18 @@ main(void)
 
 	/* Fetch that too. */
 	test_expect_str("get array 5", c_array_get(a, 2), "peanuts");
+
+	print_array(a);
+
+	/* Insert new data before old data */
+	testresult("insert array middle",
+		   c_array_insert(a, 1, strdup("bacon")));
+
+	print_array(a);
+
+	/* Verify data. */
+	test_expect_str("get array 6", c_array_get(a, 1), "bacon");
+	test_expect_str("get array 7", c_array_get(a, 3), "peanuts");
 
 	/* Remove it all. */
 	/* FIXME: not implemented

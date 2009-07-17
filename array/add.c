@@ -40,9 +40,9 @@ c_array_insert(struct c_array *a, int key, const void *value)
 	if (!a)
 		return 0;
 
-	if (a->a_len >= a->a_size)
+	if ((key > a->a_len ? key : a->a_len) + 1 >= a->a_size)
 	{
-		ssize_t newlen = a->resizer(a->a_size, a->a_len + 1);
+		ssize_t newlen = a->resizer(a->a_size, key + 1);
 		void *newptr;
 
 		if ((newptr = realloc(a->a_values, newlen)) == NULL)
@@ -61,8 +61,11 @@ c_array_insert(struct c_array *a, int key, const void *value)
 	{
 		memset(a->a_values + a->a_len * sizeof(void *), 0,
 			key - a->a_len);
-		a->a_len = key;
+		a->a_len = key + 1;
 	}
+	else
+		a->a_len++;
+
 	a->a_values[key] = value;
 
 	return 1;
@@ -89,7 +92,7 @@ c_array_replace(struct c_array *a, int key, const void *value)
 int
 c_array_push(struct c_array *a, const void *value)
 {
-	return c_array_insert(a, a->a_len + 1, value);
+	return c_array_insert(a, a->a_len, value);
 }
 
 /**

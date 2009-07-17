@@ -40,3 +40,22 @@ c_array_get(struct c_array *a, int key)
 
 	return a->a_values[key];
 }
+
+/**
+ * Call the given callback for each member in the entire array.
+ */
+int
+c_array_foreach(struct c_array *a, c_arcallback cb,
+		const void *userdata)
+{
+	ssize_t i;
+
+	if (!a)
+		return 0;
+
+	for (i = 0; i < a->a_len; i++)
+		if (cb(a->a_values[i], userdata))
+			return 1;
+
+	return 1;
+}
