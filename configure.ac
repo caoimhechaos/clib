@@ -78,5 +78,5 @@ AC_TYPE_UINT8_T
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([memset])
 
-AC_CONFIG_FILES([include/clib/Makefile hash/Makefile t/Makefile Makefile])
+AC_CONFIG_FILES([include/clib/Makefile array/Makefile hash/Makefile t/Makefile Makefile])
 AC_OUTPUT
