@@ -8,6 +8,7 @@ typedef uint32_t	(*c_hashfunc)(const void *input);
 typedef int		(*c_equalfunc)(const void *a, const void *b);
 typedef void		(*c_destructor)(void *what);
 typedef int		(*c_htcallback)(const void *entry, const void *userdata);
+typedef int		(*c_arcallback)(const void *entry, const void *userdata);
 typedef	ssize_t		(*c_resizestrategy)(ssize_t old, ssize_t new);
 
 /**
@@ -85,6 +86,7 @@ extern int c_array_unshift(struct c_array *a, const void *value);
 
 /* Lookup entries from an array */
 extern void *c_array_get(struct c_array *a, int key);
+extern int c_array_foreach(struct c_array *a, c_arcallback cb, const void *userdata);
 
 /* Remove entries from an array */
 extern int c_array_remove(struct c_array *a, int key);
