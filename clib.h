@@ -8,6 +8,7 @@ typedef uint32_t	(*c_hashfunc)(const void *input);
 typedef int		(*c_equalfunc)(const void *a, const void *b);
 typedef void		(*c_destructor)(void *what);
 typedef int		(*c_htcallback)(const void *entry, const void *userdata);
+typedef	ssize_t		(*c_resizestrategy)(ssize_t old, ssize_t new);
 
 /**
  * Data structures
@@ -30,6 +31,17 @@ struct c_hashtable
 	c_destructor	h_valdestr;
 
 	SLIST_HEAD(, c_hashtable_value) * m_values;
+};
+
+struct c_array
+{
+	/**
+	 * length:	The number of entries currently in the array.
+	 * size:	The number of entries currently allocated.
+	 */
+	ssize_t		a_len, a_size;
+	c_resizestrategy resizer;
+	const void **   a_values;
 };
 
 /**
@@ -61,9 +73,32 @@ extern int c_hashtable_foreach(struct c_hashtable *h, c_htcallback cb,
 extern int c_hashtable_remove(struct c_hashtable *h, const void *key);
 extern int c_hashtable_remove_all(struct c_hashtable *h);
 
+/* Create a new array */
+extern struct c_array *c_array_new(c_resizestrategy strategy);
+extern void c_array_destroy(struct c_array *a);
+
+/* Add new entries to an array */
+extern int c_array_insert(struct c_array *a, int key, const void *value);
+extern int c_array_replace(struct c_array *a, int key, const void *value);
+extern int c_array_push(struct c_array *a, const void *value);
+extern int c_array_unshift(struct c_array *a, const void *value);
+
+/* Lookup entries from an array */
+extern void *c_array_get(struct c_array *a, int key);
+
+/* Remove entries from an array */
+extern int c_array_remove(struct c_array *a, int key);
+extern void *c_array_pop(struct c_array *a);
+extern void *c_array_shift(struct c_array *a);
+
 /* Some default functions for hashes et cetera. */
 extern int c_stringequals(const void *a, const void *b);
 extern int c_stringhash(const void *input);
 extern int c_dummyhash(const void *input);
+
+/* Sizing strategies */
+extern ssize_t c_resize_minimal(ssize_t old, ssize_t new);
+extern ssize_t c_resize_linear(ssize_t old, ssize_t new);
+extern ssize_t c_resize_quadratic(ssize_t old, ssize_t new);
 
 #endif /* HAVE_CLIB_H */
