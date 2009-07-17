@@ -1,7 +1,7 @@
 noinst_LTLIBRARIES=	libempty.la
 libempty_la_SOURCES=	empty.c
 
-TESTS=			hash_basics
+TESTS=			hash_basics array_basics
 EXTRA_DIST=		${TESTS}
 
 AM_CPPFLAGS=		-I${top_srcdir}
@@ -11,3 +11,6 @@ CLEANFILES=		${TESTS} ${TESTS:=.o}
 
 hash_basics:	hash_basics.o
 	${LINK} hash_basics.o ${top_srcdir}/libclib.la
+
+array_basics:	array_basics.o
+	${LINK} array_basics.o ${top_srcdir}/libclib.la
