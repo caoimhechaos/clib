@@ -29,5 +29,8 @@
 #ifdef HAVE_CLIB_QUEUE_H
 #include <clib/queue.h>
 #endif
+#ifdef HAVE_ASSERT_H
+#include <assert.h>
+#endif
 
 #include "clib.h"
