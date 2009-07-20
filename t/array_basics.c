@@ -2,6 +2,7 @@
 #include "testsuite.h"
 
 #include <stdio.h>
+#include <string.h>
 
 static int
 print_array_cb(void *val, void *_ictr)
@@ -9,7 +10,7 @@ print_array_cb(void *val, void *_ictr)
 	char *text = val;
 	int *ictr = _ictr;
 	printf("Element %d address 0x%08lX content \"%s\"\n", *ictr, (intptr_t) val, val);
-	*ictr++;
+	(*ictr)++;
 	return 0;
 }
 
@@ -29,7 +30,7 @@ main(void)
 
 	/* Create array. */
 	testresult("create array",
-		a = c_array_new(c_resize_minimal));
+		(a = c_array_new(c_resize_minimal)));
 	test_expect_int(ssize_t, a->a_len, 0);
 
 	print_array(a);
