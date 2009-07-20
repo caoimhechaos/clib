@@ -38,7 +38,8 @@ AC_PROG_MAKE_SET
 AC_CHECK_LIB([nbcompat], [main], [LIBS="-lnbcompat $LIBS"])
 
 # Checks for header files.
-AC_CHECK_HEADERS([string.h strings.h memory.h stdlib.h unistd.h queue.h sys/types.h sys/queue.h nbcompat/queue.h])
+AC_CHECK_HEADERS([string.h strings.h memory.h stdlib.h unistd.h queue.h	\
+	sys/types.h sys/queue.h nbcompat/queue.h assert.h])
 CL_IFDEF(SLIST_HEAD, [SLIST_HEAD(name,type)],
 	[struct name { struct type *slh_first; /* first element */ }],
 	[Singly-linked list head])

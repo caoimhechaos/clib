@@ -37,18 +37,26 @@
 int
 c_array_insert(struct c_array *a, int key, const void *value)
 {
+	ssize_t newlen;
 	if (!a)
 		return 0;
 
-	if ((key > a->a_len ? key : a->a_len) + 1 >= a->a_size)
+	newlen = (key > a->a_len ? key : a->a_len) + 1;
+
+	if (newlen > a->a_size)
 	{
-		ssize_t newlen = a->resizer(a->a_size, key + 1) || 1;
+		ssize_t newsz = a->resizer(a->a_size, newlen);
 		void *newptr;
 
-		if ((newptr = realloc(a->a_values, newlen)) == NULL)
+		if (newsz <= 0) newsz = 1;
+
+		if ((newptr = realloc(a->a_values, newsz)) == NULL)
 			return 0;
 
 		a->a_values = newptr;
+		a->a_size = newsz;
+
+		assert(a->a_size >= a->a_len);
 
 		memset(a->a_values + a->a_len * sizeof(void *), 0,
 			 (a->a_size - a->a_len) * sizeof(void *));
