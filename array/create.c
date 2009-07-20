@@ -45,9 +45,16 @@ c_array_new(c_resizestrategy strategy)
 	a->a_len = 0;
 	a->resizer = strategy;
 
-	a->a_size = strategy(0, 0);
+	a->a_size = strategy(0, 0) || 1;
 
-	a->a_values = malloc((a->a_size ? a->a_size : 1) * sizeof(void *));
+	a->a_values = malloc(a->a_size * sizeof(void *));
+	if (!a->a_values)
+	{
+		free(a);
+		return NULL;
+	}
+
+	memset(a->a_values, 0, (a->a_size ? a->a_size : 1) * sizeof(void *));
 
 	return a;
 }
