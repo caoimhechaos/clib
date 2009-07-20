@@ -50,7 +50,7 @@ c_array_insert(struct c_array *a, int key, const void *value)
 
 		if (newsz <= 0) newsz = 1;
 
-		if ((newptr = realloc(a->a_values, newsz)) == NULL)
+		if ((newptr = realloc(a->a_values, newsz * sizeof(void *))) == NULL)
 			return 0;
 
 		a->a_values = newptr;
