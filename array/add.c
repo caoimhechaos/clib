@@ -90,7 +90,7 @@ c_array_insert(struct c_array *a, int key, const void *value)
 int
 c_array_replace(struct c_array *a, int key, const void *value)
 {
-	if (key > a->a_len)
+	if (key >= a->a_len)
 		return c_array_insert(a, key, value);
 	
 	a->a_values[key] = value;
