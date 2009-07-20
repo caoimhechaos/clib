@@ -1,3 +1,9 @@
+libclib (0.1.99-2) unstable; urgency=low
+
+  * Fixed array implementation
+
+ -- Tonnerre Lombard <tonnerre.lombard@sygroup.ch>  Mon, 20 Jul 2009 15:04:02 +0200
+
 libclib (0.1.99-1) unstable; urgency=low
 
   * Initial release
