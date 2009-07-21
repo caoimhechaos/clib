@@ -95,8 +95,8 @@ extern void *c_array_shift(struct c_array *a);
 
 /* Some default functions for hashes et cetera. */
 extern int c_stringequals(const void *a, const void *b);
-extern int c_stringhash(const void *input);
-extern int c_dummyhash(const void *input);
+extern uint32_t c_stringhash(const void *input);
+extern uint32_t c_dummyhash(const void *input);
 
 /* Sizing strategies */
 extern ssize_t c_resize_minimal(ssize_t old, ssize_t new);
