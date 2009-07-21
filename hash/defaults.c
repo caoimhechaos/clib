@@ -49,7 +49,7 @@ c_stringequals(const void *a, const void *b)
 /**
  * Return a hash value of the given string.
  */
-int
+uint32_t
 c_stringhash(const void *input)
 {
 	const char *cvals = input;
@@ -65,7 +65,7 @@ c_stringhash(const void *input)
 /**
  * Return a dummy hash value of 0. Useful for linear hashmaps (size == 0).
  */
-int
+uint32_t
 c_dummyhash(const void *input)
 {
 	return 0;
