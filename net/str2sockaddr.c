@@ -28,6 +28,7 @@
  */
 
 #include "clib_internal.h"
+#include <stdio.h>
 
 #ifdef HAVE_GETADDRINFO
 /**
@@ -94,5 +95,21 @@ c_str2sockaddr(char *str, struct sockaddr_storage **res)
 	freeaddrinfo(addr);
 
 	return 0;
+}
+#endif
+
+#ifdef HAVE_INET_NTOP
+char *
+c_sockaddr2str(struct sockaddr_storage *sa)
+{
+	char astr[INET6_ADDRSTRLEN];
+
+	memset(astr, 0, INET6_ADDRSTRLEN);
+
+	if (!inet_ntop(sa->ss_family, sa, astr, INET6_ADDRSTRLEN))
+		return NULL;
+
+	/* Leave strdup() error handling to the caller. Muahahah */
+	return strdup(astr);
 }
 #endif

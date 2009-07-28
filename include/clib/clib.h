@@ -107,5 +107,6 @@ extern ssize_t c_resize_quadratic(ssize_t old, ssize_t new);
  * Network function prototypes.
  */
 extern int c_str2sockaddr(char *str, struct sockaddr_storage **res);
+extern char *c_sockaddr2str(struct sockaddr_storage *);
 
 #endif /* HAVE_CLIB_H */
