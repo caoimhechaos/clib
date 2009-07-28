@@ -8,6 +8,9 @@
 #ifdef HAVE_STDINT_H
 #include <stdint.h>
 #endif
+#ifdef HAVE_STDDEF_H
+#include <stddef.h>
+#endif
 #ifdef HAVE_STRING_H
 #include <string.h>
 #endif
@@ -31,6 +34,13 @@
 #endif
 #ifdef HAVE_ASSERT_H
 #include <assert.h>
+#endif
+
+#ifdef HAVE_SYS_SOCKET_H
+#include <sys/socket.h>
+#endif
+#ifdef HAVE_NETDB_H
+#include <netdb.h>
 #endif
 
 #include "clib.h"
