@@ -32,8 +32,8 @@
 /**
  * Simply remove an entry from an array.
  */
-int
-c_array_remove(struct c_array *a, int key)
+static int
+_c_array_remove(struct c_array *a, int key, int dodestroy)
 {
 	ssize_t newsz;
 	if (!a || key < 0 || key > a->a_len)
@@ -41,6 +41,9 @@ c_array_remove(struct c_array *a, int key)
 
 	if (key < a->a_len)
 	{
+		if (dodestroy)
+			a->destructor(a->a_values[key]);
+
 		memmove(a->a_values + key * sizeof(void *),
 			a->a_values + (key + 1) * sizeof(void *),
 			a->a_len - key - 1);
@@ -61,15 +64,23 @@ c_array_remove(struct c_array *a, int key)
 	return 1;
 }
 
+int
+c_array_remove(struct c_array *a, int key)
+{
+	return _c_array_remove(a, key, 1);
+}
+
 /**
  * Remove the last entry of an array and return it.
+ *
+ * Please note that this does not destruct the value.
  */
 void *
 c_array_pop(struct c_array *a)
 {
 	void *retval = c_array_get(a, a->a_len);
 
-	if (!c_array_remove(a, a->a_len))
+	if (!_c_array_remove(a, a->a_len, 0))
 		return NULL;
 
 	return retval;
@@ -77,13 +88,15 @@ c_array_pop(struct c_array *a)
 
 /**
  * Remove the first entry of an array and return it.
+ *
+ * Please note that this does not destruct the value.
  */
 void *
 c_array_shift(struct c_array *a)
 {
 	void *retval = c_array_get(a, 0);
 
-	if (!c_array_remove(a, 0))
+	if (!_c_array_remove(a, 0, 0))
 		return NULL;
 
 	return retval;

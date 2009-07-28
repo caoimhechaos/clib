@@ -33,10 +33,19 @@
 #include "clib_internal.h"
 
 /**
- * Create a dynamically resizing array.
+ * Create a dynamically resizing array the short way (no destructors).
  */
 struct c_array *
 c_array_new(c_resizestrategy strategy)
+{
+	return c_array_new_complex(strategy, c_dummydestructor);
+}
+
+/**
+ * Create a dynamically resizing array.
+ */
+struct c_array *
+c_array_new_complex(c_resizestrategy strategy, c_destructor destructor)
 {
 	struct c_array *a = malloc(sizeof(struct c_array));
 
@@ -44,6 +53,7 @@ c_array_new(c_resizestrategy strategy)
 
 	a->a_len = 0;
 	a->resizer = strategy;
+	a->destructor = destructor;
 
 	a->a_size = strategy(0, 0);
 	if (a->a_size <= 0) a->a_size = 1;
@@ -66,6 +76,11 @@ c_array_new(c_resizestrategy strategy)
 void
 c_array_destroy(struct c_array *a)
 {
+	unsigned int i;
+
+	for (i = 0; i < a->a_len; i++)
+		a->destructor(a->a_values[i]);
+
 	free(a->a_values);
 	free(a);
 }
