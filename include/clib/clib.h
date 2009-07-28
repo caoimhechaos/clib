@@ -42,6 +42,7 @@ struct c_array
 	 */
 	ssize_t		a_len, a_size;
 	c_resizestrategy resizer;
+	c_destructor	destructor;
 	const void **   a_values;
 };
 
@@ -76,6 +77,8 @@ extern int c_hashtable_remove_all(struct c_hashtable *h);
 
 /* Create a new array */
 extern struct c_array *c_array_new(c_resizestrategy strategy);
+extern struct c_array *c_array_new_complex(c_resizestrategy strategy,
+			c_destructor value_destructor);
 extern void c_array_destroy(struct c_array *a);
 
 /* Add new entries to an array */
@@ -102,6 +105,9 @@ extern uint32_t c_dummyhash(const void *input);
 extern ssize_t c_resize_minimal(ssize_t old, ssize_t new);
 extern ssize_t c_resize_linear(ssize_t old, ssize_t new);
 extern ssize_t c_resize_quadratic(ssize_t old, ssize_t new);
+
+/* Default destructors */
+extern void c_dummydestructor(void *addr);
 
 /**
  * Network function prototypes.

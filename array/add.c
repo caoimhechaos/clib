@@ -91,7 +91,8 @@ c_array_replace(struct c_array *a, int key, const void *value)
 {
 	if (key >= a->a_len)
 		return c_array_insert(a, key, value);
-	
+
+	a->destructor(a->a_values[key]);
 	a->a_values[key] = value;
 
 	return 1;

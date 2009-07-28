@@ -64,3 +64,12 @@ c_resize_quadratic(ssize_t old, ssize_t new)
 
 	return ret;
 }
+
+/**
+ * Dummy destructor - doesn't destroy anything.
+ */
+void
+c_dummydestructor(void *addr)
+{
+	return;
+}
