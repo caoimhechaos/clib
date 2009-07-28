@@ -1,6 +1,6 @@
 Name:           clib
 Version:        0.1.99
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Development files for the clib library
 
 Group:          Development/Libraries
@@ -61,3 +61,18 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+libclib (0.1.99-2) unstable; urgency=low
+
+  * Added function to convert host:port strings to socket addresses for
+    connect, bind etc.
+
+ -- Tonnerre Lombard <tonnerre.lombard@sygroup.ch>  Tue, 28 Jul 2009 14:02:53 +0200
+
+libclib (0.1.99-1) unstable; urgency=low
+
+  * Initial release for RedHat
+  * Corrected return types for default hash functions
+  * Fixed array implementation
+
+ -- Tonnerre Lombard <tonnerre.lombard@sygroup.ch>  Tue, 21 Jul 2009 08:23:33 +0200
+
