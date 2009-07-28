@@ -46,7 +46,7 @@ struct c_array
 };
 
 /**
- * Function prototypes
+ * Function prototypes for data types
  */
 
 /* Create or destroy a new hash table. */
@@ -102,5 +102,10 @@ extern uint32_t c_dummyhash(const void *input);
 extern ssize_t c_resize_minimal(ssize_t old, ssize_t new);
 extern ssize_t c_resize_linear(ssize_t old, ssize_t new);
 extern ssize_t c_resize_quadratic(ssize_t old, ssize_t new);
+
+/**
+ * Network function prototypes.
+ */
+extern int c_str2sockaddr(char *str, struct sockaddr_storage **res);
 
 #endif /* HAVE_CLIB_H */
