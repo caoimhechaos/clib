@@ -5,12 +5,12 @@ TESTS=			hash_basics array_basics
 EXTRA_DIST=		${TESTS}
 
 AM_CPPFLAGS=		-I${top_srcdir}
-#LDFLAGS+=		${top_srcdir}/libclib.la
+#LDFLAGS+=		${top_builddir}/libclib.la
 
 CLEANFILES=		${TESTS} ${TESTS:=.o}
 
 hash_basics:	hash_basics.o
-	${LINK} hash_basics.o ${top_srcdir}/libclib.la
+	${LINK} hash_basics.o ${top_builddir}/libclib.la
 
 array_basics:	array_basics.o
-	${LINK} array_basics.o ${top_srcdir}/libclib.la
+	${LINK} array_basics.o ${top_builddir}/libclib.la
