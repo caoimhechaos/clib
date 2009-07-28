@@ -43,4 +43,4 @@
 #include <netdb.h>
 #endif
 
-#include "clib.h"
+#include <clib/clib.h>
