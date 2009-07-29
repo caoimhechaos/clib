@@ -1,6 +1,6 @@
 Name:           clib
-Version:        0.1.99
-Release:        2%{?dist}
+Version:        0.2.99
+Release:        1%{?dist}
 Summary:        Development files for the clib library
 
 Group:          Development/Libraries
@@ -61,6 +61,13 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+libclib (0.2.99-1) unstable; urgency=low
+
+  * Added destructors to the array API to match the hash API.
+  * Bump revision after release of version 0.2.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Wed, 29 Jul 2009 09:56:01 +0200
+
 libclib (0.1.99-2) unstable; urgency=low
 
   * Added function to convert host:port strings to socket addresses for
