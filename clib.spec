@@ -61,25 +61,15 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-libclib (0.2-1) stable; urgency=low
+* Wed Jul 29 2009 - caoimhechaos@protonmail.com
+- New stable release 0.2.
+- Added destructors to the array API to match the hash API.
 
-  * New stable release 0.2.
-  * Added destructors to the array API to match the hash API.
+* Tue Jul 28 2009 - caoimhechaos@protonmail.com
+- Added function to convert host:port strings to socket addresses for
+  connect, bind etc.
 
- -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 28 Jul 2009 14:02:53 +0200
-
-libclib (0.1.99-2) unstable; urgency=low
-
-  * Added function to convert host:port strings to socket addresses for
-    connect, bind etc.
-
- -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 28 Jul 2009 14:02:53 +0200
-
-libclib (0.1.99-1) unstable; urgency=low
-
-  * Initial release for RedHat
-  * Corrected return types for default hash functions
-  * Fixed array implementation
-
- -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 21 Jul 2009 08:23:33 +0200
-
+* Tue Jul 21 2009 - caoimhechaos@protonmail.com
+- Initial release for RedHat
+- Corrected return types for default hash functions
+- Fixed array implementation
