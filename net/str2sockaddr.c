@@ -32,19 +32,14 @@
 
 #ifdef HAVE_GETADDRINFO
 /**
- * str2sockaddr -	convert a given string of the type hostname:port to a
- *					struct sockaddr.
+ * str2addrinfo -	convert a given string of the type hostname:port to a
+ *			struct addrinfo (basically a list of sockaddrs).
  *
  * Returns a getaddrinfo error code, or 0 upon success.
- *
- * Please note that this function only ever fetches the first offered address
- * entry; there's no way to get any other members without going through
- * getaddrinfo() directly.
  */
 int
-c_str2sockaddr(char *str, struct sockaddr_storage **res)
+c_str2addrinfo(char *str, struct addrinfo **addr)
 {
-	struct addrinfo *addr;
 	int err;
 	char *hostport = strdup(str), *horig = hostport, *portptr;
 
@@ -79,13 +74,36 @@ c_str2sockaddr(char *str, struct sockaddr_storage **res)
 		*portptr++ = '\0';
 	}
 
-	if ((err = getaddrinfo(hostport, portptr, NULL, &addr)))
+	if ((err = getaddrinfo(hostport, portptr, NULL, addr)))
 	{
 		free(horig);
 		return err;
 	}
-
 	free(horig);
+
+	return 0;
+}
+
+/**
+ * str2sockaddr -	convert a given string of the type hostname:port to a
+ *			struct sockaddr.
+ *
+ * Returns a getaddrinfo error code, or 0 upon success.
+ *
+ * Please note that this function only ever fetches the first offered address
+ * entry; there's no way to get any other members without going through
+ * str2addrinfo().
+ */
+int
+c_str2sockaddr(char *str, struct sockaddr_storage **res)
+{
+	struct addrinfo *addr;
+	int err;
+
+	err = c_str2addrinfo(str, &addr);
+	if (err)
+		return err;
+
 	*res = malloc(sizeof(struct sockaddr_storage));
 	if (!*res)
 		return EAI_MEMORY;
@@ -100,7 +118,7 @@ c_str2sockaddr(char *str, struct sockaddr_storage **res)
 }
 #endif
 
-#ifdef HAVE_INET_NTOP
+#ifdef HAVE_GETNAMEINFO
 char *
 c_sockaddr2str(struct sockaddr_storage *sa)
 {

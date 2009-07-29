@@ -85,7 +85,7 @@ AC_CHECK_TYPES([struct sockaddr_storage], [],
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([memset memmove strdup getaddrinfo freeaddrinfo	\
-	gai_strerror strchr inet_ntop])
+	gai_strerror strchr getnameinfo])
 
 INCLUDES="-I\${top_srcdir} -I\${top_srcdir}/include"
 AC_SUBST(INCLUDES)
