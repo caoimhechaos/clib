@@ -90,7 +90,9 @@ c_str2sockaddr(char *str, struct sockaddr_storage **res)
 	if (!*res)
 		return EAI_MEMORY;
 
-	memcpy(*res, addr->ai_addr, sizeof(struct sockaddr_storage));
+	memset(*res, 0, sizeof(struct sockaddr_storage));
+
+	memcpy(*res, addr->ai_addr, addr->ai_addrlen);
 
 	freeaddrinfo(addr);
 
@@ -103,10 +105,15 @@ char *
 c_sockaddr2str(struct sockaddr_storage *sa)
 {
 	char astr[INET6_ADDRSTRLEN];
+	char pstr[8];
+	int res;
 
 	memset(astr, 0, INET6_ADDRSTRLEN);
+	memset(pstr, 0, 8);
 
-	if (!inet_ntop(sa->ss_family, sa, astr, INET6_ADDRSTRLEN))
+	res = getnameinfo(sa, sizeof(struct sockaddr_storage),
+			astr, INET6_ADDRSTRLEN, pstr, 32, NI_NUMERICHOST | NI_NUMERICSERV);
+	if (res)
 		return NULL;
 
 	/* Leave strdup() error handling to the caller. Muahahah */
