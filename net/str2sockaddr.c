@@ -84,6 +84,59 @@ c_str2addrinfo(char *str, struct addrinfo **addr)
 	return 0;
 }
 
+#ifdef HAVE_CONNECT
+/**
+ * connect2addrinfo -	connect to a given struct addrinfo, trying each entry
+ * 			until finally one succeeds.
+ *
+ * If none succeeds, the first error which ocurred is returned.
+ */
+int
+c_connect2addrinfo(int sockfd, struct addrinfo *addr)
+{
+	struct addrinfo *walk;
+	int first_error = 0;
+	int ret;
+
+	for (walk = addr; walk != NULL; walk = walk->ai_next)
+	{
+		if ((ret = connect(sockfd, walk->ai_addr, walk->ai_addrlen)) == 0)
+			return 0;
+		if (first_error == 0)
+			first_error = ret;
+	}
+
+	return first_error;
+
+}
+#endif
+
+#ifdef HAVE_BIND
+/**
+ * bind2addrinfo -	bind to a given struct addrinfo, trying each entry
+ * 			until finally one succeeds.
+ *
+ * If none succeeds, the first error which ocurred is returned.
+ */
+int
+c_bind2addrinfo(int sockfd, struct addrinfo *addr)
+{
+	struct addrinfo *walk;
+	int first_error = 0;
+	int ret;
+
+	for (walk = addr; walk != NULL; walk = walk->ai_next)
+	{
+		if ((ret = bind(sockfd, walk->ai_addr, walk->ai_addrlen)) == 0)
+			return 0;
+		if (first_error == 0)
+			first_error = ret;
+	}
+
+	return first_error;
+}
+#endif
+
 /**
  * str2sockaddr -	convert a given string of the type hostname:port to a
  *			struct sockaddr.

@@ -114,5 +114,7 @@ extern void c_dummydestructor(void *addr);
  */
 extern int c_str2sockaddr(char *str, struct sockaddr_storage **res);
 extern char *c_sockaddr2str(struct sockaddr_storage *);
+extern int c_bind2addrinfo(int sockfd, struct addrinfo *addr);
+extern int c_connect2addrinfo(int sockfd, struct addrinfo *addr);
 
 #endif /* HAVE_CLIB_H */
