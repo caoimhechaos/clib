@@ -14,7 +14,7 @@ main(void)
 	test_expect_int(int, c_str2addrinfo("localhost:33994", &addr), 0);
 	testresult("addr != NULL", (addr != NULL));
 
-	fprintf(stderr, "Testing AF_INET...\n");
+	fputs("Testing AF_INET...\n", stderr);
 
 	testresult("socket() returns an fd >= 0", (serverfd = socket(AF_INET, SOCK_STREAM, 0)) >= 0);
 
@@ -27,7 +27,7 @@ main(void)
 	testresult("addr != NULL", (addr != NULL));
 	test_expect_int(int, c_connect2addrinfo(clientfd, addr), 0);
 
-	fprintf(stderr, "Testing AF_INET6...\n");
+	fputs("Testing AF_INET6...\n", stderr);
 
 	testresult("socket() returns an fd >= 0", (serverfd = socket(AF_INET6, SOCK_STREAM, 0)) >= 0);
 
