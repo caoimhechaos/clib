@@ -78,9 +78,9 @@ c_array_remove(struct c_array *a, int key)
 void *
 c_array_pop(struct c_array *a)
 {
-	void *retval = c_array_get(a, a->a_len);
+	void *retval = c_array_get(a, a->a_len - 1);
 
-	if (!_c_array_remove(a, a->a_len, 0))
+	if (!_c_array_remove(a, a->a_len - 1, 0))
 		return NULL;
 
 	return retval;
