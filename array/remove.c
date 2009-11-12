@@ -50,7 +50,7 @@ _c_array_remove(struct c_array *a, int key, int dodestroy)
 	}
 
 	newsz = a->resizer(a->a_len, a->a_len - 1);
-	if (newsz != a->a_size)
+	if (newsz && newsz != a->a_size)
 	{
 		void *newptr = realloc(a->a_values, newsz);
 
