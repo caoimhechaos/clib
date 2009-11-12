@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([clib], [0.2], [caoimhechaos@protonmail.com])
+AC_INIT([clib], [0.2.1], [caoimhechaos@protonmail.com])
 AC_CONFIG_SRCDIR([clib_internal.h])
 AC_CONFIG_HEADERS([config.h include/clib/queue.h])
 AM_INIT_AUTOMAKE
