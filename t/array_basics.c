@@ -63,10 +63,13 @@ main(void)
 
 	/* Verify data. */
 	test_expect_str("get array 9", c_array_get(a, 1), "bacon");
-	test_expect_str("get array 10", c_array_get(a, 4), "peanuts");
+	test_expect_str("get array 10", c_array_get(a, 3), "charlene");
+	test_expect_str("get array 11", c_array_get(a, 4), "peanuts");
 
 	/* Pop the last element */
 	test_expect_str("pop array 1", (str = c_array_pop(a)), "peanuts");
+	if (str) free(str);
+	test_expect_str("pop array 2", (str = c_array_pop(a)), "charlene");
 	if (str) free(str);
 
 	/* Remove it all. */
