@@ -1,3 +1,14 @@
+libclib (0.2.1-1) stable; urgency=low
+
+  * New stable release 0.2.1.
+  * Fixed some memory leaks in the test suite.
+  * Fixed off-by-one error which prevented c_array_pop() from working and
+    added a test case.
+  * Fixed the case of reallocation to 0 in _c_array_delete(), making it
+    possible to empty an array.
+
+ -- Tonnerre Lombard <tonnerre.lombard@sygroup.ch>  Thu, 12 Nov 2009 12:30:01 +0200
+
 libclib (0.2-1) stable; urgency=low
 
   * New stable release 0.2.

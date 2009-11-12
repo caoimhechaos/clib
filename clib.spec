@@ -1,5 +1,5 @@
 Name:           clib
-Version:        0.2
+Version:        0.2.1
 Release:        1%{?dist}
 Summary:        Development files for the clib library
 
@@ -61,6 +61,14 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Nov 12 2009 - tonnerre.lombard@sygroup.ch
+- New stable release 0.2.1.
+- Fixed some memory leaks in the test suite.
+- Fixed off-by-one error which prevented c_array_pop() from working and
+  added a test case.
+- Fixed the case of reallocation to 0 in _c_array_delete(), making it
+  possible to empty an array.
+
 * Wed Jul 29 2009 - tonnerre.lombard@sygroup.ch
 - New stable release 0.2.
 - Added destructors to the array API to match the hash API.
