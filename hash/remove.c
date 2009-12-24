@@ -79,7 +79,7 @@ c_hashtable_remove_all(struct c_hashtable *h)
 	if (!h)
 		return 0;
 
-	for (i = 0; i < h->h_size; h++)
+	for (i = 0; i < h->h_size; i++)
 	{
 		SLIST_FOREACH(val, &h->m_values[i], v_vlist)
 		{
