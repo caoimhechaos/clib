@@ -75,7 +75,7 @@ c_hashtable_new_complex(c_hashfunc hash, c_equalfunc equals,
 	if (!h->m_values)
 		goto out_free;
 
-	memset(h->m_values, 0, htbl_size);
+	memset(h->m_values, 0, htbl_size * sizeof(struct c_hashtable_value *));
 
 	/*
 	for (i = 0; i < htbl_size; i++)
