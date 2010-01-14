@@ -1,5 +1,5 @@
 Name:           clib
-Version:        0.2.1
+Version:        0.2.2
 Release:        1%{?dist}
 Summary:        Development files for the clib library
 
@@ -61,6 +61,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jan 14 2010 - tonnerre.lombard@sygroup.ch
+- New stable release 0.2.2 (Bugfix release).
+- Fix for the clear function from Andreas Bartsch.
+- Fix for the array initialization from Andreas Bartsch.
+
 * Thu Nov 12 2009 - tonnerre.lombard@sygroup.ch
 - New stable release 0.2.1.
 - Fixed some memory leaks in the test suite.

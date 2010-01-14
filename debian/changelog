@@ -1,3 +1,11 @@
+libclib (0.2.2-1) stable; urgency=low
+
+  * New stable release 0.2.2 (Bugfix release).
+  * Fix for the clear function from Andreas Bartsch.
+  * Fix for the array initialization from Andreas Bartsch.
+
+ -- Tonnerre Lombard <tonnerre.lombard@sygroup.ch>  Thu, 14 Jan 2010 10:20:50 +0100
+
 libclib (0.2.1-1) stable; urgency=low
 
   * New stable release 0.2.1.
