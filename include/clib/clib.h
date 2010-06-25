@@ -113,6 +113,7 @@ extern void c_dummydestructor(void *addr);
  * Network function prototypes.
  */
 extern int c_str2sockaddr(char *str, struct sockaddr_storage **res);
+extern int c_str2addrinfo(char *str, struct addrinfo **addr);
 extern char *c_sockaddr2str(struct sockaddr_storage *);
 extern int c_bind2addrinfo(int sockfd, struct addrinfo *addr);
 extern int c_connect2addrinfo(int sockfd, struct addrinfo *addr);
