@@ -3,7 +3,7 @@
 
 struct c_rbtree_entry
 {
-	struct c_rbtree_entry *rb_left, *rb_right;
+	struct c_rbtree_entry *rb_left, *rb_right, *rb_parent;
 	int		rb_color;
 	void *		rb_key;
 	void *		rb_value;
