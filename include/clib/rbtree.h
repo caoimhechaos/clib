@@ -23,8 +23,8 @@ struct c_rbtree
  * Function prototypes for data types
  */
 /* Create a new rbtree */
-extern struct c_rbtree *c_rbtree_new(c_equalsfunc compare);
-extern struct c_rbtree *c_rbtree_new_complex(c_equalsfunc compare,
+extern struct c_rbtree *c_rbtree_new(c_equalfunc compare);
+extern struct c_rbtree *c_rbtree_new_complex(c_equalfunc compare,
 	c_destructor keydestr, c_destructor valdestr);
 extern void c_rbtree_destroy(struct c_rbtree *t);
 
