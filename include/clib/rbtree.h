@@ -16,7 +16,7 @@ struct c_rbtree
 	c_destructor	rb_keydestr;
 	c_destructor	rb_valdestr;
 
-	struct c_rbtree_entry	*head;
+	struct c_rbtree_entry	*rb_head;
 };
 
 /**
