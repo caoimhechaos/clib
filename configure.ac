@@ -91,5 +91,5 @@ INCLUDES="-I\${top_srcdir} -I\${top_srcdir}/include"
 AC_SUBST(INCLUDES)
 
 AC_CONFIG_FILES([include/clib/Makefile array/Makefile hash/Makefile
-	net/Makefile t/Makefile Makefile])
+	net/Makefile rbtree/Makefile t/Makefile Makefile])
 AC_OUTPUT

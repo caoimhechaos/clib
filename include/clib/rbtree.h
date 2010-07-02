@@ -1,6 +1,9 @@
 #ifndef HAVE_CLIB_RBTREE_H
 #define HAVE_CLIB_RBTREE_H 1
 
+#define	RBTREE_COLOR_BLACK	1
+#define	RBTREE_COLOR_RED	2
+
 struct c_rbtree_entry
 {
 	struct c_rbtree_entry *rb_left, *rb_right, *rb_parent;

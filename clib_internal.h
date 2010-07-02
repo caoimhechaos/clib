@@ -50,3 +50,4 @@
 #endif
 
 #include <clib/clib.h>
+#include <clib/rbtree.h>
