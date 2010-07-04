@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2009 The NetBSD Foundation, Inc.
+ * Copyright (c) 2010 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
@@ -28,6 +28,109 @@
  */
 
 #include "clib_internal.h"
+
+static void
+rbtree_rotate(struct c_rbtree_entry *node)
+{
+	struct c_rbtree_entry *parent = node->rb_parent,
+		*grandfather = parent ? parent->rb_parent : NULL,
+		*sibling;
+
+	if (parent && node == parent->rb_left)
+		sibling = parent->rb_right;
+	else if (parent && node == parent->rb_right)
+		sibling = parent->rb_left;
+
+	if (grandfather->rb_left == parent)
+		grandfather->rb_left = sibling;
+	else if (grandfather->rb_right == parent)
+		grandfather->rb_right = sibling;
+
+	sibling->rb_parent = grandfather->rb_parent;
+
+	if (parent->rb_left == node)
+	{
+		sibling->rb_left->rb_parent = parent;
+		parent->rb_right = sibling->rb_left;
+		parent->rb_right->rb_parent = parent;
+		sibling->rb_left = parent;
+	}
+	else if (parent->rb_right == node);
+	{
+		sibling->rb_right->rb_parent = parent;
+		parent->rb_left = sibling->rb_right;
+		parent->rb_left->rb_parent = parent;
+		sibling->rb_right = parent;
+	}
+
+	parent->rb_parent = sibling;
+}
+
+/**
+ * Rebalance the rbtree, so that no more than two RBTREE_COLOR_RED
+ * nodes appear in a row.
+ */
+static void
+c_rbtree_rebalance(struct c_rbtree_entry *node)
+{
+	struct c_rbtree_entry *parent, *grandfather, *uncle;
+
+	while (node)
+	{
+		parent = node->rb_parent;
+		grandfather = (parent ? parent->rb_parent : NULL);
+
+		if (grandfather && parent == grandfather->rb_left)
+			uncle = grandfather->rb_right;
+		else if (grandfather && parent == grandfather->rb_right)
+			uncle = grandfather->rb_left;
+
+		/* If parent is black and we are red, we're fine. */
+		if (parent->rb_color == RBTREE_COLOR_BLACK)
+			return;
+
+		if (uncle && uncle->rb_color == RBTREE_COLOR_RED)
+		{
+			parent->rb_color = RBTREE_COLOR_BLACK;
+			uncle->rb_color = RBTREE_COLOR_BLACK;
+			grandfather->rb_color = RBTREE_COLOR_RED;
+			node = grandfather;
+		}
+		else
+		{
+			if (node == parent->rb_right &&
+				parent == grandfather->rb_left)
+			{
+				rbtree_rotate(parent);
+				node = node->rb_left;
+				parent = node ? node->rb_parent : NULL;
+				grandfather = parent ? parent->rb_parent : NULL;
+			}
+			else if (node == parent->rb_left &&
+				parent == grandfather->rb_right)
+			{
+				rbtree_rotate(parent);
+				node = node->rb_right;
+				parent = node ? node->rb_parent : NULL;
+				grandfather = parent ? parent->rb_parent : NULL;
+			}
+
+			node->rb_parent->rb_color = RBTREE_COLOR_BLACK;
+			grandfather->rb_color = RBTREE_COLOR_RED;
+
+			if (node == parent->rb_left &&
+				parent == grandfather->rb_left)
+				rbtree_rotate(grandfather);
+			else if (node == parent->rb_right &&
+				parent == grandfather->rb_right)
+				rbtree_rotate(grandfather);
+
+			return;
+		}
+	}
+
+	return;
+}
 
 /**
  * Insert a new record into the rbtree. If an entry with the same key
@@ -95,7 +198,7 @@ c_rbtree_insert(struct c_rbtree *t, const void *key, const void *value)
 		newval->rb_parent = parent;
 	}
 
-	c_rbtree_rebalance(t, newval);
+	c_rbtree_rebalance(newval);
 
 	return 1;
 }
@@ -168,7 +271,6 @@ c_rbtree_replace(struct c_rbtree *t, const void *key, const void *value)
 		newval->rb_parent = parent;
 	}
 
-	c_rbtree_rebalance(t, newval);
-
+	c_rbtree_rebalance(newval);
 	return 1;
 }
