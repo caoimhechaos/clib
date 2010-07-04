@@ -38,7 +38,7 @@ extern int c_rbtree_replace(struct c_rbtree *t, const void *key,
 			    const void *value);
 
 /* Lookup functions */
-extern int c_rbtree_lookup(struct c_rbtree *t, const void *key);
+extern void *c_rbtree_lookup(struct c_rbtree *t, const void *key);
 extern int c_rbtree_lookup_cb(struct c_rbtree *t, const void *key,
 	c_htcallback cb, const void *userdata);
 extern int c_rbtree_foreach_dfs(struct c_rbtree *t, c_htcallback cb,
