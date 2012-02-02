@@ -1,0 +1,12 @@
+* Sun Jan  8 2012 - Arangamanikkannan Manickam <arangamani.kannan@gmail.com> - 0.2.3-1
+- Release for Fedora
+
+* Wed Jul 29 2009 - Tonnerre Lombard <tonnerre.lombard@sygroup.ch> - 0.2.2-1
+- Added destructors to the array API to match the hash API.
+
+* Tue Jul 28 2009 - Tonnerre Lombard <tonnerre.lombard@sygroup.ch> - 0.2.1-1
+- Added function to convert host:port strings to socket addresses for
+  connect, bind etc.
+
+* Tue Jul 21 2009 - Tonnerre Lombard <tonnerre.lombard@sygroup.ch> - 0.2.0-1
+- Initial release for RedHat

@@ -1,0 +1,9 @@
+clib - A Library for providing advanced C functions
+
+clib is a development library which provides the end user with hashes,
+arrays and other features that are very useful for programming in the
+C programming language.
+
+Visit git repository: https://github.com/arangamani/clib
+
+To clone the repository: git clone git@github.com:arangamani/clib.git
