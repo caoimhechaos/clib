@@ -242,6 +242,7 @@ c_rbtree_replace(struct c_rbtree *t, const void *key, const void *value)
 			free(newval);
 			next->rb_value = value;
 			t->rb_keydestr(key);
+			return 1;
 		}
 		else
 			next = next->rb_right;
