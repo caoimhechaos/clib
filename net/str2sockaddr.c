@@ -38,7 +38,7 @@
  * Returns a getaddrinfo error code, or 0 upon success.
  */
 int
-c_str2addrinfo(char *str, struct addrinfo **addr)
+c_str2addrinfo(const char *str, struct addrinfo **addr)
 {
 	int err;
 	char *hostport = strdup(str), *horig = hostport, *portptr;
@@ -92,9 +92,9 @@ c_str2addrinfo(char *str, struct addrinfo **addr)
  * If none succeeds, the first error which ocurred is returned.
  */
 int
-c_connect2addrinfo(int sockfd, struct addrinfo *addr)
+c_connect2addrinfo(int sockfd, const struct addrinfo *addr)
 {
-	struct addrinfo *walk;
+	const struct addrinfo *walk;
 	int first_error = 0;
 	int ret;
 
@@ -119,9 +119,9 @@ c_connect2addrinfo(int sockfd, struct addrinfo *addr)
  * If none succeeds, the first error which ocurred is returned.
  */
 int
-c_bind2addrinfo(int sockfd, struct addrinfo *addr)
+c_bind2addrinfo(int sockfd, const struct addrinfo *addr)
 {
-	struct addrinfo *walk;
+	const struct addrinfo *walk;
 	int first_error = 0;
 	int ret;
 
@@ -148,7 +148,7 @@ c_bind2addrinfo(int sockfd, struct addrinfo *addr)
  * str2addrinfo().
  */
 int
-c_str2sockaddr(char *str, struct sockaddr_storage **res)
+c_str2sockaddr(const char *str, struct sockaddr_storage **res)
 {
 	struct addrinfo *addr;
 	int err;
@@ -173,7 +173,7 @@ c_str2sockaddr(char *str, struct sockaddr_storage **res)
 
 #ifdef HAVE_GETNAMEINFO
 char *
-c_sockaddr2str(struct sockaddr_storage *sa)
+c_sockaddr2str(const struct sockaddr_storage *sa)
 {
 	char astr[INET6_ADDRSTRLEN];
 	char pstr[8];
