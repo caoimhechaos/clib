@@ -1,8 +1,9 @@
 noinst_LTLIBRARIES=	libempty.la
 libempty_la_SOURCES=	empty.c
 
-TESTS=			hash_basics array_basics rbtree_basics net_basics
+TESTS=			hash_basics array_basics net_basics
 TESTS+=			net_bindconnect
+
 EXTRA_DIST=		${TESTS}
 
 AM_CPPFLAGS=		-I${top_srcdir}
