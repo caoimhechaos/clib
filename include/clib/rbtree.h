@@ -1,6 +1,8 @@
 #ifndef HAVE_CLIB_RBTREE_H
 #define HAVE_CLIB_RBTREE_H 1
 
+#ifdef EXPERIMENTAL_RBTREE
+
 #define	RBTREE_COLOR_BLACK	1
 #define	RBTREE_COLOR_RED	2
 
@@ -49,5 +51,6 @@ extern int c_rbtree_foreach_bfs(struct c_rbtree *t, c_htcallback cb,
 /* Remove functions */
 extern int c_rbtree_remove(struct c_rbtree *t, const void *key);
 extern int c_rbtree_remove_all(struct c_rbtree *t);
+#endif /* EXPERIMENTAL_RBTREE */
 
 #endif /* HAVE_CLIB_RBTREE_H */
