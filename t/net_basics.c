@@ -16,6 +16,7 @@ main(void)
 		fprintf(stderr, "Error was: %s\n", gai_strerror(special));
 
 	test_expect_int(int, sa->ss_family, AF_INET);
+	test_expect_int(short, ((struct sockaddr_in *)sa)->sin_port, htons(53));
 	test_expect_str("reserialized IP address", (ptr = c_sockaddr2str(sa)), "127.0.0.1");
 	if (ptr)
 		free(ptr);
