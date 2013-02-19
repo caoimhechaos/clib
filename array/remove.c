@@ -49,17 +49,17 @@ _c_array_remove(struct c_array *a, int key, int dodestroy)
 			a->a_len - key - 1);
 	}
 
-	newsz = a->resizer(a->a_len, a->a_len - 1);
+	newsz = a->resizer(a->a_len, --a->a_len);
 	if (newsz && newsz != a->a_size)
 	{
-		void *newptr = realloc(a->a_values, newsz);
+		void *newptr = realloc(a->a_values, newsz * sizeof(void *));
 
 		/* Not enough memory to shrink...? */
 		if (newptr == NULL)
 			return 0;
-	}
 
-	a->a_len--;
+		a->a_size = newsz;
+	}
 
 	return 1;
 }
