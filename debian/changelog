@@ -1,3 +1,10 @@
+libclib (0.3-1) unstable; urgency=low
+
+  * Addition of socket functions (c_str2addrinfo(), etc.).
+  * Big bug fixes for the array implementation.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 19 Feb 2013 21:01:12 +0100
+
 libclib (0.2.99-1) unstable; urgency=low
 
   * Added destructors to the array API to match the hash API.

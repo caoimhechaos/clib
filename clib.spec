@@ -1,5 +1,5 @@
 Name:           clib
-Version:        0.2.99
+Version:        0.3
 Release:        1%{?dist}
 Summary:        Development files for the clib library
 
@@ -61,6 +61,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Feb 19 2012 - caoimhechaos@protonmail.com
+- Release of version 0.3.
+- Addition of socket functions (c_str2addrinfo(), etc.).
+- Big bug fixes for the array implementation.
+
 * Wed Jul 29 2009 - caoimhechaos@protonmail.com
 - Bump revision after release of version 0.2.
 - Added destructors to the array API to match the hash API.
