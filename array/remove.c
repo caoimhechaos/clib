@@ -58,6 +58,7 @@ _c_array_remove(struct c_array *a, int key, int dodestroy)
 		if (newptr == NULL)
 			return 0;
 
+		a->a_values = newptr;
 		a->a_size = newsz;
 	}
 
