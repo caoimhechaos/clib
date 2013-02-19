@@ -68,8 +68,10 @@ main(void)
 
 	/* Pop the last element */
 	test_expect_str("pop array 1", (str = c_array_pop(a)), "peanuts");
+	test_expect_int(ssize_t, a->a_len, 4);
 	if (str) free(str);
 	test_expect_str("pop array 2", (str = c_array_pop(a)), "charlene");
+	test_expect_int(ssize_t, a->a_len, 3);
 	if (str) free(str);
 
 	/* Remove it all. */
