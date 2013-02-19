@@ -36,7 +36,7 @@ static int
 _c_array_remove(struct c_array *a, int key, int dodestroy)
 {
 	ssize_t newsz;
-	if (!a || key < 0 || key > a->a_len)
+	if (!a || key < 0 || key >= a->a_len)
 		return 0;
 
 	if (key < a->a_len)
