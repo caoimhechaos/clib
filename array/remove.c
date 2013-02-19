@@ -46,7 +46,7 @@ _c_array_remove(struct c_array *a, int key, int dodestroy)
 
 		memmove(a->a_values + key * sizeof(void *),
 			a->a_values + (key + 1) * sizeof(void *),
-			a->a_len - key - 1);
+			(a->a_len - key - 1) * sizeof(void *));
 	}
 
 	newsz = a->resizer(a->a_len, --a->a_len);
