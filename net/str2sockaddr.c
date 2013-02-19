@@ -175,6 +175,11 @@ c_str2sockaddr(const char *str, struct sockaddr_storage **res)
 char *
 c_sockaddr2str(const struct sockaddr_storage *sa)
 {
+#ifdef HAVE_SS_LEN_IN_SS
+	const ssize_t sslen = sa->ss_len;
+#else /* !HAVE_SS_LEN_IN_SS */
+	const ssize_t sslen = sizeof(struct sockaddr_storage);
+#endif /* HAVE_SS_LEN_IN_SS */
 	char astr[INET6_ADDRSTRLEN];
 	char pstr[8];
 	int res;
@@ -182,7 +187,7 @@ c_sockaddr2str(const struct sockaddr_storage *sa)
 	memset(astr, 0, INET6_ADDRSTRLEN);
 	memset(pstr, 0, 8);
 
-	res = getnameinfo(sa, sa->ss_len, astr, INET6_ADDRSTRLEN, pstr, 32,
+	res = getnameinfo(sa, sslen, astr, INET6_ADDRSTRLEN, pstr, 32,
 		NI_NUMERICHOST | NI_NUMERICSERV);
 	if (res)
 		return NULL;

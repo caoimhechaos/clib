@@ -81,6 +81,26 @@ AC_CHECK_TYPES([struct sockaddr_storage], [],
  [AC_DEFINE_UNQUOTED([sockaddr_storage], [sockaddr],
   [Socket address structure])], [[#include <sys/socket.h>]])
 
+AC_CACHE_CHECK([for ss_len field in struct sockaddr_storage],
+		ac_cv_have_ss_len_in_struct_ss, [
+	AC_TRY_COMPILE(
+		[
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+#ifdef HAVE_SYS_SOCKET_H
+#include <sys/socket.h>
+#endif
+		],
+		[ struct sockaddr_storage s; s.ss_len = 1; ],
+		[ ac_cv_have_ss_len_in_struct_ss="yes" ],
+		[ ac_cv_have_ss_len_in_struct_ss="no" ],
+	)
+])
+if test "x$ac_cv_have_ss_len_in_struct_ss" = "xyes" ; then
+	AC_DEFINE(HAVE_SS_LEN_IN_SS, 1, [Does struct sockaddr_storage have ss_len?])
+fi
+
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
