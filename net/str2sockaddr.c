@@ -182,8 +182,8 @@ c_sockaddr2str(const struct sockaddr_storage *sa)
 	memset(astr, 0, INET6_ADDRSTRLEN);
 	memset(pstr, 0, 8);
 
-	res = getnameinfo(sa, sizeof(struct sockaddr_storage),
-			astr, INET6_ADDRSTRLEN, pstr, 32, NI_NUMERICHOST | NI_NUMERICSERV);
+	res = getnameinfo(sa, sa->ss_len, astr, INET6_ADDRSTRLEN, pstr, 32,
+		NI_NUMERICHOST | NI_NUMERICSERV);
 	if (res)
 		return NULL;
 
